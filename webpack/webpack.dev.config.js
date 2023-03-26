@@ -1,0 +1,21 @@
+const commonConfig = require("./webpack.common.config");
+const { merge } = require("webpack-merge");
+const path = require("path");
+
+module.exports = merge(commonConfig, {
+  mode: "development",
+  devServer: {
+    port: 9000,
+    static: {
+      directory: path.resolve(__dirname, ".."),
+    },
+    devMiddleware: {
+      index: "index.html",
+      writeToDisk: true,
+    },
+    client: {
+      overlay: true,
+    },
+    liveReload: false,
+  },
+});
