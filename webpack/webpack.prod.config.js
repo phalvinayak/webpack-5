@@ -5,6 +5,7 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const path = require("path");
 const glob = require("glob");
 const { PurgeCSSPlugin } = require("purgecss-webpack-plugin");
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 
 module.exports = merge(commonConfig, {
   output: {
@@ -25,6 +26,46 @@ module.exports = merge(commonConfig, {
               },
             },
           ],
+        },
+      }),
+      new ImageMinimizerPlugin({
+        minimizer: {
+          implementation: ImageMinimizerPlugin.imageminMinify,
+          options: {
+            plugins: [
+              ["imagemin-mozjpeg", { quality: 40 }],
+              [
+                "imagemin-pngquant",
+                {
+                  quality: [0.65, 0.9],
+                  speed: 4,
+                },
+              ],
+              ["imagemin-gifsicle", { interlaced: true }],
+              [
+                "imagemin-svgo",
+                {
+                  plugins: [
+                    {
+                      name: "preset-default",
+                      params: {
+                        overrides: {
+                          removeViewBox: false,
+                          addAttributesToSVGElement: {
+                            params: {
+                              attributes: [
+                                { xmlns: "http://www.w3.org/2000/svg" },
+                              ],
+                            },
+                          },
+                        },
+                      },
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
         },
       }),
     ],
@@ -75,7 +116,7 @@ module.exports = merge(commonConfig, {
         generator: {
           filename: "./images/[name].[contenthash:12][ext]",
         },
-        use: [
+        /*use: [
           {
             loader: "image-webpack-loader",
             options: {
@@ -88,7 +129,7 @@ module.exports = merge(commonConfig, {
               },
             },
           },
-        ],
+        ],*/
       },
     ],
   },

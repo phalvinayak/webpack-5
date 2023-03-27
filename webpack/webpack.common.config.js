@@ -1,5 +1,6 @@
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWepackPlugin = require("copy-webpack-plugin");
 const path = require("path");
 
 const config = {
@@ -24,6 +25,13 @@ const config = {
       template: "src/template.html",
     }),
     new CleanWebpackPlugin(),
+    new CopyWepackPlugin({
+      patterns: [
+        {
+          from: "images/motivational-pictures/*.*",
+        },
+      ],
+    }),
   ],
 };
 
