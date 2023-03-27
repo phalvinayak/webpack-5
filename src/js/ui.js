@@ -67,9 +67,8 @@ function showNotfication() {
 }
 
 function renderMotivationalPictures() {
-  console.log("Function getting called");
+  // console.log("Function getting called");
   getMotivationalPictures().then((pictures) => {
-    console.log(pictures);
     const moticationalPicturesHtml = `
       <div class="motivational-pictures">
         ${pictures

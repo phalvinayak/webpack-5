@@ -67,16 +67,16 @@ module.exports = merge(commonConfig, {
             ],
           },
         },
-        generator: [
-          {
-            type: "asset",
-            preset: "webp-custom-name",
-            implementation: ImageMinimizerPlugin.imageminGenerate,
-            options: {
-              plugins: ["imagemin-webp"],
-            },
-          },
-        ],
+        // generator: [
+        //   {
+        //     type: "asset",
+        //     preset: "webp-custom-name",
+        //     implementation: ImageMinimizerPlugin.imageminGenerate,
+        //     options: {
+        //       plugins: ["imagemin-webp"],
+        //     },
+        //   },
+        // ],
       }),
     ],
   },

@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack serve --config ./webpack/webpack.dev.config.js --hot",
-    "build": "webpack --config ./webpack/webpack.prod.config.js"
+    "dev": "cross-env NODE_ENV=dev webpack serve --config ./webpack/webpack.dev.config.js --hot",
+    "build": "cross-env NODE_ENV=production webpack --config ./webpack/webpack.prod.config.js",
+    "typecheck": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
@@ -19,9 +20,17 @@
   },
   "homepage": "https://github.com/phalvinayak/webpack-5#readme",
   "devDependencies": {
+    "@babel/core": "^7.21.3",
+    "@babel/plugin-proposal-pipeline-operator": "^7.18.9",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-typescript": "^7.21.0",
+    "@emotion/babel-plugin": "^11.10.6",
     "autoprefixer": "^10.4.14",
+    "babel-loader": "^9.1.2",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",
+    "core-js": "^3.29.1",
+    "cross-env": "^7.0.3",
     "css-loader": "^6.7.3",
     "css-minimizer-webpack-plugin": "^4.2.2",
     "html-loader": "^4.2.0",
@@ -40,6 +49,7 @@
     "sass": "^1.60.0",
     "sass-loader": "^13.2.1",
     "style-loader": "^3.3.2",
+    "typescript": "^5.0.2",
     "webpack": "^5.76.3",
     "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.13.1",
@@ -48,6 +58,7 @@
   "dependencies": {
     "-": "^0.0.1",
     "@emotion/css": "^11.10.6",
-    "bootstrap": "^5.2.3"
+    "bootstrap": "^5.2.3",
+    "lodash-es": "^4.17.21"
   }
 }

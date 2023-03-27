@@ -9,12 +9,22 @@ const config = {
     path: path.resolve(__dirname, "../dist"),
     // clean: true,
   },
+  resolve: {
+    extensions: [".ts", ".js"],
+  },
   module: {
     rules: [
       {
         test: /\.html$/,
         use: {
           loader: "html-loader",
+        },
+      },
+      {
+        test: /\.(js|ts)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
         },
       },
     ],
