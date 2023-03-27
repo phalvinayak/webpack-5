@@ -1,5 +1,6 @@
 import styles from "../styles/notification.module.css";
 import { css } from "@emotion/css";
+import CheckmarkImage from "../../images/checkmark.svg";
 
 const checkBoxSize = "30px";
 const realCheckboxClass = css`
@@ -19,7 +20,7 @@ export function renderTodos(todos) {
     return `
           <li data-id="${todo.id}" class="${className}">
               <span class="custom-checkbox">
-                  <img class="check" src="./images/checkmark.svg" width="22" height="22"></img>
+                  <img class="check" src="${CheckmarkImage}" width="22" height="22"></img>
                   <input class="${realCheckboxClass}" data-element="real-checkbox" type="checkbox" ${completionClass} />
               </span>
               <label>${todo.text}</label>
