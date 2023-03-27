@@ -1,22 +1,16 @@
 import styles from "../styles/notification.module.css";
-import jss from "jss";
-import preset from "jss-preset-default";
-
-jss.setup(preset());
+import { css } from "@emotion/css";
 
 const checkBoxSize = "30px";
-const jssStyle = {
-  realCheckbox: {
-    width: checkBoxSize,
-    height: checkBoxSize,
-    cursor: "pointer",
-    opacity: 0,
-    position: "absolute",
-    top: "-3px",
-    left: "-5px",
-  },
-};
-const { classes } = jss.createStyleSheet(jssStyle).attach();
+const realCheckboxClass = css`
+  width: ${checkBoxSize};
+  height: ${checkBoxSize};
+  cursor: pointer;
+  opacity: 0;
+  position: absolute;
+  top: -3px;
+  left: -5px;
+`;
 
 export function renderTodos(todos) {
   const renderedItemArray = todos.map(function (todo) {
@@ -26,7 +20,7 @@ export function renderTodos(todos) {
           <li data-id="${todo.id}" class="${className}">
               <span class="custom-checkbox">
                   <img class="check" src="./images/checkmark.svg" width="22" height="22"></img>
-                  <input class="${classes.realCheckbox}" data-element="real-checkbox" type="checkbox" ${completionClass} />
+                  <input class="${realCheckboxClass}" data-element="real-checkbox" type="checkbox" ${completionClass} />
               </span>
               <label>${todo.text}</label>
               <span class="delete"></span>
