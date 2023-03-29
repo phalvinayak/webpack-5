@@ -6,10 +6,12 @@ const path = require("path");
 const glob = require("glob");
 const { PurgeCSSPlugin } = require("purgecss-webpack-plugin");
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+const CompressionPlugin = require("compression-webpack-plugin");
 
 module.exports = merge(commonConfig, {
   output: {
     filename: "js/[name].[contenthash:12].js",
+    publicPath: "/static/",
   },
   mode: "production",
   optimization: {
@@ -79,6 +81,29 @@ module.exports = merge(commonConfig, {
         // ],
       }),
     ],
+    splitChunks: {
+      chunks: "all",
+      maxSize: Infinity,
+      minSize: 2000,
+      cacheGroups: {
+        jquery: {
+          test: /[\\/]node_modules[\\/]jquery[\\/]/,
+          name: "jquery",
+        },
+        bootstrap: {
+          test: /[\\/]node_modules[\\/]bootstrap[\\/]/,
+          name: "bootstrap",
+        },
+        lodash: {
+          test: /[\\/]node_modules[\\/]lodash-es[\\/]/,
+          name: "lodash-es",
+        },
+        node_modules: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "node_modules",
+        },
+      },
+    },
   },
   module: {
     rules: [
@@ -151,6 +176,17 @@ module.exports = merge(commonConfig, {
       paths: glob.sync(`${path.join(__dirname, "../src")}/**/*`, {
         nodir: true,
       }),
+    }),
+    new CompressionPlugin({
+      filename: "[path][base].gz",
+      algorithm: "gzip",
+      test: /\.(js|css)$/,
+    }),
+    new CompressionPlugin({
+      filename: "[path][base].br",
+      algorithm: "brotliCompress",
+      test: /\.(js|css)$/,
+      compressionOptions: { level: 11 },
     }),
   ],
 });
